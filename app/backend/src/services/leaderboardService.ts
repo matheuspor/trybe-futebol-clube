@@ -1,20 +1,25 @@
-import { ILeaderboardTeam } from '../utils/interfaces';
 import {
   calculateLeaderboardAll,
   calculateLeaderboardAway,
   calculateLeaderboardHome,
-  sortLeaderboard,
 } from '../utils/helperFunctions';
 import matchsService from './matchsService';
 
 const leaderboardServices = {
-  getAll: async (teamField?: string) => {
+  getAll: async () => {
     const matchs = await matchsService.getAllInProgress(false);
-    let leaderboard = [] as ILeaderboardTeam[];
-    if (teamField === 'home') leaderboard = calculateLeaderboardHome(matchs);
-    if (teamField === 'away') leaderboard = calculateLeaderboardAway(matchs);
-    if (!teamField) leaderboard = calculateLeaderboardAll(matchs);
-    return sortLeaderboard(leaderboard);
+    const leaderboard = calculateLeaderboardAll(matchs);
+    return leaderboard;
+  },
+  getAllHome: async () => {
+    const matchs = await matchsService.getAllInProgress(false);
+    const leaderboard = calculateLeaderboardHome(matchs);
+    return leaderboard;
+  },
+  getAllAway: async () => {
+    const matchs = await matchsService.getAllInProgress(false);
+    const leaderboard = calculateLeaderboardAway(matchs);
+    return leaderboard;
   },
 };
 

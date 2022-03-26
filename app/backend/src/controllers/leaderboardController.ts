@@ -3,12 +3,12 @@ import leaderboardServices from '../services/leaderboardService';
 
 const leaderboardController = {
   getAllHome: async (_req: express.Request, res: express.Response) => {
-    const leaderboard = await leaderboardServices.getAll('home');
+    const leaderboard = await leaderboardServices.getAllHome();
 
     res.status(200).json(leaderboard);
   },
   getAllAway: async (_req: express.Request, res: express.Response) => {
-    const leaderboard = await leaderboardServices.getAll('away');
+    const leaderboard = await leaderboardServices.getAllAway();
 
     res.status(200).json(leaderboard);
   },

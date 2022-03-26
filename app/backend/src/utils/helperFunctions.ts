@@ -1,5 +1,12 @@
 import { ILeaderboardTeam, IMatch } from './interfaces';
 
+const sortLeaderboard = (leaderboard: ILeaderboardTeam[]) => leaderboard.sort((a, b) =>
+  b.totalPoints - a.totalPoints
+  || b.totalVictories - a.totalVictories
+  || b.goalsBalance - a.goalsBalance
+  || b.goalsFavor - a.goalsFavor
+  || a.goalsOwn - b.goalsOwn);
+
 const addWinToClub = (
   clubName: string,
   clubGoals: number,
@@ -139,7 +146,7 @@ const calculateLeaderboardHome = (matchs: IMatch[]) => {
       leaderboard = addDrawToLeaderboard(homeClubName, homeTeamGoals, awayTeamGoals, leaderboard);
     }
   });
-  return leaderboard;
+  return sortLeaderboard(leaderboard);
 };
 
 const calculateLeaderboardAway = (matchs: IMatch[]) => {
@@ -155,7 +162,7 @@ const calculateLeaderboardAway = (matchs: IMatch[]) => {
       leaderboard = addDrawToLeaderboard(awayClubName, awayTeamGoals, homeTeamGoals, leaderboard);
     }
   });
-  return leaderboard;
+  return sortLeaderboard(leaderboard);
 };
 
 const calculateLeaderboardAll = (matchs: IMatch[]) => {
@@ -175,17 +182,10 @@ const calculateLeaderboardAll = (matchs: IMatch[]) => {
       leaderboard = addDrawToLeaderboard(homeClubName, homeTeamGoals, awayTeamGoals, leaderboard);
     }
   });
-  return leaderboard;
+  return sortLeaderboard(leaderboard);
 };
-
-const sortLeaderboard = (leaderboard: ILeaderboardTeam[]) => leaderboard.sort((a, b) =>
-  b.totalPoints - a.totalPoints
-  || b.totalVictories - a.totalVictories
-  || b.goalsBalance - a.goalsBalance
-  || b.goalsFavor - a.goalsFavor
-  || a.goalsOwn - b.goalsOwn);
 
 export {
   calculateLeaderboardHome, calculateLeaderboardAway,
-  calculateLeaderboardAll, sortLeaderboard,
+  calculateLeaderboardAll,
 };
