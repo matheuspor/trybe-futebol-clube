@@ -19,9 +19,9 @@ export interface IClub {
 
 export interface IMatch {
   id?: number;
-  homeTeam: string;
+  homeTeam: number;
   homeTeamGoals: number;
-  awayTeam: string;
+  awayTeam: number;
   awayTeamGoals: number;
   inProgress?: boolean;
   homeClub: {
@@ -30,6 +30,13 @@ export interface IMatch {
   awayClub: {
     clubName: string;
   }
+}
+
+export interface ICreateMatch {
+  homeTeam: string;
+  homeTeamGoals: number;
+  awayTeam: string;
+  awayTeamGoals: number;
 }
 
 export interface ILeaderboardTeam {

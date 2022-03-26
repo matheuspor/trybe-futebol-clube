@@ -1,4 +1,4 @@
-import { IMatch } from '../utils/interfaces';
+import { ICreateMatch } from '../utils/interfaces';
 import Club from '../database/models/Club';
 import Match from '../database/models/Match';
 import clubsService from './clubsService';
@@ -35,22 +35,21 @@ const matchsService = {
       .then((matchArr) => matchArr.map((match) => match.get({ plain: true })));
     return matchs;
   },
-  create: async (match: IMatch) => {
+  create: async (match: ICreateMatch) => {
     const { homeTeam, awayTeam } = match;
-    const newMatch = { ...match, inProgress: true };
     const homeClub = await clubsService.getById(homeTeam);
     const awayClub = await clubsService.getById(awayTeam);
     if (!homeClub || !awayClub) {
       const error = new Error('There is no team with such id!');
       throw error;
     }
-    const matchCreated = await Match.create(newMatch);
+    const matchCreated = await Match.create({ ...match, inProgress: true });
     return matchCreated;
   },
   finishMatch: async (id: string) => {
     await Match.update({ inProgress: false }, { where: { id } });
   },
-  updateMatch: async (id: string, homeTeamGoals: string, awayTeamGoals: string) => {
+  updateMatch: async (id: string, homeTeamGoals: number, awayTeamGoals: number) => {
     await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   },
 };

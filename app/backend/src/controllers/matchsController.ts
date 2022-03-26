@@ -12,13 +12,15 @@ const matchsController = {
     return res.status(200).send(matchs);
   },
   create: async (req: express.Request, res: express.Response) => {
-    const { homeTeam, awayTeam } = req.body;
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
     try {
       if (homeTeam === awayTeam) {
         const error = new Error('It is not possible to create a match with two equal teams');
         throw error;
       }
-      const match = await matchsService.create(req.body);
+      const match = await matchsService.create(
+        { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals },
+      );
       return res.status(201).send(match);
     } catch (error) {
       const { message } = error as Error;
