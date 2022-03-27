@@ -5,7 +5,6 @@ import { app } from '../app';
 
 import { Response } from 'superagent';
 import { ILeaderboardTeam } from '../utils/interfaces';
-import { sortLeaderboard } from '../utils/helperFunctions';
 
 chai.use(chaiHttp);
 
@@ -50,7 +49,6 @@ describe('Tests GET /leaderboard/home', () => {
       .get('/leaderboard/home')
       .then((res: Response) => {
         expect(isSorted(res.body)).to.be.true;
-        expect(sortLeaderboard(res.body)).to.be.equal(res.body);
       });
   })
 })
@@ -82,7 +80,6 @@ describe('Tests GET /leaderboard/away', () => {
       .get('/leaderboard/away')
       .then((res: Response) => {
         expect(isSorted(res.body)).to.be.true;
-        expect(sortLeaderboard(res.body)).to.be.equal(res.body);
       });
   })
 })
@@ -114,7 +111,6 @@ describe('Tests GET /leaderboard/', () => {
       .get('/leaderboard/')
       .then((res: Response) => {
         expect(isSorted(res.body)).to.be.true;
-        expect(sortLeaderboard(res.body)).to.be.equal(res.body);
       });
   })
 })
