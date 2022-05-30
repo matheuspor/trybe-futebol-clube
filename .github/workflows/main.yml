@@ -43,7 +43,7 @@ jobs:
           node-version: 14
           
       - name: Builds Docker container and runs shell
-        run: cd app & docker-compose run backend sh
+        run: cd app && docker-compose run backend sh
 
       - name: Run Tests
         run: npm test
