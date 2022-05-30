@@ -41,12 +41,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-
-      - name: Install Dependencies
-        run: cd app/backend && npm install
-
-      - name: Run MySql container for testing
-        run: docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
           
-      - name: Run Tests
-        run: cd app/backend && npm test
+      - name: Run Tests inside Docker container
+        run: npm test
