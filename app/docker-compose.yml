@@ -18,7 +18,7 @@ services:
   backend:
     build: ./backend
     env_file:
-    - ./backend/.env          
+    - ./backend/.env  
     volumes:
       - backend:/home/node/app
     depends_on:
@@ -34,11 +34,11 @@ services:
     image: mysql:8.0.21
     container_name: db
     ports:
-      - 3002:3306
+      - 3306:3306
     volumes:
       - db:/var/lib/mysql
     env_file:
-    - ./backend/.env 
+    - ./backend/.env
     restart: 'always'
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
