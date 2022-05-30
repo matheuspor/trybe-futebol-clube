@@ -4,7 +4,8 @@
   "description": "",
   "main": "./build/server",
   "scripts": {
-    "pretest": "npm run db:reset",
+    "build": "npx tsc --build",
+    "pretest": "npm run build && npm run db:reset",
     "test": "mocha -r ts-node/register ./src/tests/**.ts -t 10000 --exit",
     "test:coverage": "nyc --all npm run test",
     "test:coverage:json": "nyc --all --reporter=json-summary npm run test",

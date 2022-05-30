@@ -21,7 +21,7 @@ jobs:
           node-version: 14
         
       - name: Install Dependencies
-        run: npm install
+        run: cd app/backend && npm install
 
       - name: Lint Source Files
         run: cd app/backend && npm run lint
