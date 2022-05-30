@@ -43,7 +43,7 @@ jobs:
           node-version: 14
           
       - name: Builds Docker containers
-        run: npm run compose-up
+        run: npm run compose:up
 
       - name: Run Tests
         run: docker exec -ti app-backend-1 sh -c "npm test"
