@@ -2,7 +2,8 @@ version: '3.9'
 services:
   frontend:
     build: ./frontend
-    # ...
+    volumes:
+      - frontend:/home/node/app
     ports:
     - 3000:3000
     depends_on:
@@ -16,21 +17,15 @@ services:
       retries: 5
   backend:
     build: ./backend
-    # ...
+    env_file:
+    - ./backend/.env          
+    volumes:
+      - backend:/home/node/app
     depends_on:
       db:
         condition: service_healthy
     ports:
     - 3001:3001
-    environment:
-      - PORT=3001
-      # Os dados abaixo se referem ao container `db`
-      # Dica: Relembre aqui da comunicação interna entre containers
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_NAME=TRYBE_FUTEBOL_CLUBE
-      - DB_PORT=3306
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
@@ -40,8 +35,10 @@ services:
     container_name: db
     ports:
       - 3002:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+    - ./backend/.env 
     restart: 'always'
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
@@ -49,3 +46,7 @@ services:
       retries: 5
     cap_add:
       - SYS_NICE # Deve omitir alertas menores
+volumes:
+  frontend:
+  backend:
+  db:
