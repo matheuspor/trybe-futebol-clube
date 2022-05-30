@@ -42,5 +42,23 @@ jobs:
         with:
           node-version: 14
           
-      - name: Run Tests inside Docker container
+      - name: Builds Docker container and runs shell
+        run: cd app & docker-compose run backend sh
+
+      - name: Run Tests
         run: npm test
+
+      - name: Run Test-coverage
+        run: npm run test:coverage
+
+      - name: Print coverage report in Lcov and exit container
+        run: npx nyc --reporter lcov --reporter text --report-dir .nyc_coverage report && exit
+
+      - name: Copy report from container to local env
+        run: docker cp app-backend-1:app/.nyc_coverage/lcov.info /tmp && ls -la
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with: 
+          files: /tmp
+
