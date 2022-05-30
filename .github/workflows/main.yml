@@ -42,5 +42,5 @@ jobs:
         with:
           node-version: 14
           
-      - name: Run Tests inside Docker container
+      - name: Run Docker-compose and test
         run: npm test
