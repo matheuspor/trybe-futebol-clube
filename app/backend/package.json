@@ -5,11 +5,11 @@
   "main": "./build/server",
   "scripts": {
     "build": "npx tsc --build",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "pretest": "npm run build && npm run db:reset",
     "test": "mocha -r ts-node/register ./src/tests/**.ts -t 10000 --exit",
     "test:coverage": "nyc --all npm run test",
     "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "prestart": "npm run build && npm run db:reset",
     "start": "ts-node-dev ./src/server.ts",
     "predev": "npm run build && npm run db:reset",
