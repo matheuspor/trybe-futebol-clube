@@ -1,115 +1,58 @@
-on:
+name: Back-end tests
+on: 
+  push:
+    branches: [main]
+
   pull_request:
-    types: [opened, synchronize]
+    branches: ['*'] 
 
 jobs:
-  ESLint-Evaluator:
-    runs-on: self-hosted
-    name: ESLint
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+
     steps:
-      - name: Fetch project repository
+      - name: Checkout Source Files
         uses: actions/checkout@v2
 
-      - name: Fetch Blocked Files Checkout action
-        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
         with:
-          repository: betrybe/blocked-files-checkout-action
-          ref: v2
-          token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/blocked-files-checkout
+          node-version: 14
+        
+      - name: Install Dependencies
+        run: cd app/backend && npm install
 
-      - name: Fetch ESLint evaluator
-        uses: actions/checkout@v2
-        with:
-          repository: betrybe/eslint-linter-action
-          ref: v3
-          token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/eslint-evaluator
+      - name: Lint Source Files
+        run: cd app/backend && npm run lint
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1.4.4
-        with:
-          node-version: '14'
+  test:
+    name: Tests
+    needs: lint
+    runs-on: ubuntu-20.04
+    env:
+      DB_HOST: localhost
 
-      - name: Restore protected files
-        uses: ./.github/actions/blocked-files-checkout
-        with:
-          restore_branch: 'main'
-
-      - name: Sync package*.json on app/backend
-        run: npm --prefix=app/backend ci
-
-      - name: Run ESLint evaluator
-        uses: ./.github/actions/eslint-evaluator
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pr_number: ${{ github.event.pull_request.number }}
-
-  dockerfile-linter:
-      runs-on: self-hosted
-      name: Dockerfile Linter
-      steps:
-      - uses: actions/checkout@v2
-      - name: Run Dockerfile Linter on Backend
-        run: docker run --rm -i hadolint/hadolint < ./app/backend/Dockerfile
-      - name: Run Dockerfile Linter on Frontend
-        run: docker run --rm -i hadolint/hadolint < ./app/frontend/Dockerfile
-
-  Evaluator:
-    runs-on: self-hosted
-    name: Evaluator
-    needs: [ESLint-Evaluator, dockerfile-linter]
     steps:
-
-      - name: Fetch project repository
+      - name: Checkout Source Files
         uses: actions/checkout@v2
 
-      - name: Fetch Blocked Files Checkout action
-        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
         with:
-          repository: betrybe/blocked-files-checkout-action
-          ref: v2
-          token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/blocked-files-checkout
+          node-version: 14
+          
+      - name: Builds Docker containers
+        run: npm run compose:up
 
-      - name: Fetch Docker Jest evaluator
-        uses: actions/checkout@v2
-        with:
-          repository: betrybe/docker-jest-evaluator-action
-          ref: v1.1
-          token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/docker-jest-evaluator
+      - name: Run Tests and coverage
+        run: docker exec app_backend_1 sh -c "npm test && npm run test:coverage"
 
-      - name: Fetch Store evaluation
-        uses: actions/checkout@v2
-        with:
-          repository: betrybe/store-evaluation-action
-          ref: v4.2
-          token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/store-evaluation
+      - name: Print Test Report
+        run: docker exec app_backend_1 sh -c "npm run test:report"
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1.4.6
-        with:
-          node-version: '16'
+      - name: Copy report from container to local env
+        run: sudo docker cp app_backend_1:app/.nyc_coverage/lcov.info .
 
-      - name: Restore protected files
-        uses: ./.github/actions/blocked-files-checkout
-        with:
-          restore_branch: 'main'
-
-      - name: Run Docker Jest evaluation
-        id: jest_eval
-        uses: ./.github/actions/docker-jest-evaluator
-        with:
-          puppeteer_test: true
-          run_compose: true
-          wait_for: 'http://localhost:3000'
-          pr_author_username: ${{ github.event.pull_request.user.login }}
-
-      - name: Run Store evaluation
-        uses: ./.github/actions/store-evaluation
-        with:
-          evaluation-data: ${{ steps.jest_eval.outputs.result }}
-          environment: production
-          pr-number: ${{ github.event.pull_request.number }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
