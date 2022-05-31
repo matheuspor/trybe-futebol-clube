@@ -10,7 +10,6 @@
     "test": "mocha -r ts-node/register ./src/tests/**.ts -t 10000 --exit",
     "test:coverage": "nyc --all npm run test",
     "test:report": "npx nyc --reporter lcov --reporter text --report-dir .nyc_coverage report",
-    "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
     "prestart": "npm run build && npm run db:reset",
     "start": "ts-node-dev ./src/server.ts",
     "predev": "npm run build && npm run db:reset",
