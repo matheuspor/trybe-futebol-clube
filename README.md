@@ -10,6 +10,7 @@
 
   <a href="">![GitHub tests status](https://img.shields.io/github/checks-status/matheuspor/trybe-futebol-clube/main)</a>
   <a href="">![Repo top language](https://img.shields.io/github/languages/top/matheuspor/trybe-futebol-clube)</a>
+  <a href="">![Repo language count](https://img.shields.io/github/languages/count/matheuspor/trybe-futebol-clube)</a>
   <a href="">![Test-coverage](https://img.shields.io/codecov/c/github/matheuspor/trybe-futebol-clube)</a>
   
 </div>
