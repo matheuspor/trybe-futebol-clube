@@ -52,7 +52,7 @@ jobs:
         run: docker exec app_backend_1 sh -c "npm run test:report"
 
       - name: Copy report from container to local env
-        run: sudo docker cp app_backend_1:app/.nyc_coverage/lcov.info /tmp && cd /tmp && ls -la
+        run: sudo docker cp app_backend_1:app/.nyc_coverage/lcov.info . && cd /tmp && ls -la
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
