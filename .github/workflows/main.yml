@@ -46,7 +46,7 @@ jobs:
         run: npm run compose:up
 
       - name: Run Tests and coverage
-        run: docker exec app_backend_1 sh -c "npm test && npm test:coverage"
+        run: docker exec app_backend_1 sh -c "npm test && npm run test:coverage"
 
       - name: Print Test Report
         run: docker exec app_backend_1 sh -c "npm run test:report"
