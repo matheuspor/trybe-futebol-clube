@@ -45,17 +45,14 @@ jobs:
       - name: Builds Docker containers
         run: npm run compose:up
 
-      - name: Run Tests
-        run: docker exec app_backend_1 sh -c "npm test"
-
-      - name: Run Test-coverage
-        run: docker exec app_backend_1 sh -c "npm run test:coverage"
+      - name: Run Tests and coverage
+        run: docker exec app_backend_1 sh -c "npm test && npm test:coverage"
 
       - name: Print Test Report
         run: docker exec app_backend_1 sh -c "npm run test:report"
 
       - name: Copy report from container to local env
-        run: docker cp app_backend_1:app/.nyc_coverage/lcov.info /tmp && cd ../.. && ls -la
+        run: docker cp app_backend_1:app/.nyc_coverage/lcov.info /_temp && cd ../../_temp && ls -la
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
