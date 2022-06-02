@@ -3,9 +3,9 @@
 </h1>
 <p align='center'>
 	O TFC é um site informativo sobre partidas e classificações de futebol!</br>
-	:rocket: Feito durante o curso de desenvolvimento <a href="https://www.betrybe.com/">Trybe</a>
+	:rocket: Feito durante o curso de desenvolvimento <a href="https://www.betrybe.com/">Trybe</a><br>
+	⚒️ with Typescript, NodeJS, Express, MySql(Sequelize)
 </p>
-
 <div align="center">
 
   <a href="">![GitHub tests status](https://img.shields.io/github/checks-status/matheuspor/trybe-futebol-clube/main)</a>
