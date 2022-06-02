@@ -1,9 +1,8 @@
 version: '3.9'
 services:
   frontend:
-    build: ./frontend
-    volumes:
-      - frontend:/home/node/app
+    build: 
+      context: ./frontend
     ports:
     - 3000:3000
     depends_on:
@@ -16,11 +15,10 @@ services:
       timeout: 10s
       retries: 5
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
     env_file:
     - ./backend/.env  
-    volumes:
-      - backend:/home/node/app
     depends_on:
       db:
         condition: service_healthy
@@ -34,7 +32,7 @@ services:
     image: mysql:8.0.21
     container_name: db
     volumes:
-      - db_data:/var/lib/mysql
+      - db:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
@@ -54,6 +52,4 @@ secrets:
     file: ./backend/src/database/db-pass.txt
 
 volumes:
-  frontend:
-  backend:
-  db_data:
+  db:
