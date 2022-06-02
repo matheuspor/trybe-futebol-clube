@@ -41,16 +41,22 @@ Conhecimentos avaliados:
 ## Rodar Localmente:
 
 <em>Obs.: O projeto por padrão se conecta ao MySql usando as variáveis presentes em `app/backend/src/database/config.ts` e usa o arquivo `app/backend/src/database/db-pass.txt` para definir o campo `MYSQL_ROOT_PASSWORD` dentro do container MySql.</br> Altere o arquivo `db-pass.txt` caso queira usar outra senha e preencha o campo `DB_PASS` no arquivo .env `app/backend/.env` de acordo.</em>
-```bash
-# Clone o repositório:
-$ git clone https://github.com/matheuspor/trybe-futebol-clube
 
-# Entre na pasta raíz do projeto:
-$ cd trybe-futebol-clube
-
-# Sobe containers e roda aplicação
-$ npm compose:up
+Clone o repositório:
+```bash 
+git clone https://github.com/matheuspor/trybe-futebol-clube
 ```
+
+Entre na pasta raíz do projeto:
+```bash 
+cd trybe-futebol-clube
+```
+
+Sobe containers e roda aplicação
+```bash
+npm run compose:up
+```
+<em>O front-end estará disponível em "http://localhost:3000/"</em>
 
 ### Rodar Testes
 ```bash
@@ -63,10 +69,10 @@ $ npm test
 
 #### Cobertura de Testes
 ```bash
-# Entre na pasta raíz do projeto:
+# Entre na pasta raíz do projeto
 $ cd trybe-futebol-clube
 
-# Sobe containers e roda testes:
+# Sobe containers e roda testes
 $ npm test:coverage
 ```
 
