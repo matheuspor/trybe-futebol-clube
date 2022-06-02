@@ -22,6 +22,7 @@
     <a href="#cobertura-de-testes">Cobertura de Testes</a> •
     <a href="#lista-de-requisitos">Lista de Requisitos</a> •
     <a href="#tech-stack">Tech Stack</a>
+  <img src="./.docs/usage-gif.gif">
   </p>
 
 ## About
@@ -39,9 +40,11 @@ Conhecimentos avaliados:
  - Fazer um `CRUD` utilizando `ORM`;
 
 ## Rodar Localmente:
-
 <em>Obs.: O projeto por padrão se conecta ao MySql usando as variáveis presentes em `app/backend/src/database/config.ts` e usa o arquivo `app/backend/src/database/db-pass.txt` para definir o campo `MYSQL_ROOT_PASSWORD` dentro do container MySql.</br> Altere o arquivo `db-pass.txt` caso queira usar outra senha e preencha o campo `DB_PASS` no arquivo .env `app/backend/.env` de acordo.</em>
 
+### Pré-requisitos:
+- <a href="https://docs.docker.com/compose/install/">Docker-Compose</a>
+---
 Clone o repositório:
 ```bash 
 git clone https://github.com/matheuspor/trybe-futebol-clube
@@ -73,7 +76,7 @@ $ npm test
 $ cd trybe-futebol-clube
 
 # Sobe containers e roda testes
-$ npm test:coverage
+$ npm run test:coverage
 ```
 
 ## Lista de Requisitos:
