@@ -22,8 +22,13 @@
     <a href="#cobertura-de-testes">Cobertura de Testes</a> •
     <a href="#lista-de-requisitos">Lista de Requisitos</a> •
     <a href="#tech-stack">Tech Stack</a>
-  <img src="./.docs/usage-gif.gif">
   </p>
+
+---
+
+<div align="center">
+    <img src="./.docs/usage-gif.gif" style="width: 600px; height: 337px;">
+</div>
 
 ## About
 
