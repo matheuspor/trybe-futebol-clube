@@ -44,6 +44,10 @@ Conhecimentos avaliados:
  - Validar as rotas internas utilizando Token `JWT`;
  - Fazer um `CRUD` utilizando `ORM`;
 
+## Api Routes
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=trybe-futebol-clube&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fmatheuspor%2Ftrybe-futebol-clube%2Fmain%2F.docs%2FInsomnia_docs.json)
+
 ## Rodar Localmente:
 <em>Obs.: O projeto por padrão se conecta ao MySql usando as variáveis presentes em `app/backend/src/database/config.ts` e usa o arquivo `app/backend/src/database/db-pass.txt` para definir o campo `MYSQL_ROOT_PASSWORD` dentro do container MySql.</br> Altere o arquivo `db-pass.txt` caso queira usar outra senha e preencha o campo `DB_PASS` no arquivo .env `app/backend/.env` de acordo.</em>
 
