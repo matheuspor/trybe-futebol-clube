@@ -53,7 +53,7 @@ Conhecimentos avaliados:
 
 ### Pré-requisitos:
 - <a href="https://docs.docker.com/compose/install/">Docker-Compose</a>
----
+
 Clone o repositório:
 ```bash 
 git clone https://github.com/matheuspor/trybe-futebol-clube
@@ -79,7 +79,7 @@ $ cd trybe-futebol-clube
 $ npm test
 ```
 
-#### Cobertura de Testes
+### Cobertura de Testes
 ```bash
 # Entre na pasta raíz do projeto
 $ cd trybe-futebol-clube
