@@ -36,13 +36,13 @@ Neste projeto tivemos 4 dias para desenvolver um back-end dockerizado para se in
 Foi desenvolvida uma API REST(utilizando o método `TDD`) integrada à um banco de dados MySQL, usando o ORM Sequelize.
 
 Conhecimentos avaliados:
+ - Fazer um **CRUD** utilizando ORM;
  - Realizar a dockerização dos apps, network, volume e compose;
  - Modelar dados com **MySQL** através do **Sequelize**;
- - Criar e associar tabelas usando `models` do `sequelize`;
+ - Criar e associar tabelas usando **models** do **sequelize**;
  - Construir uma **API REST** com endpoints para consumir os models criados;
  - Respostas respeitando o <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status">status HTML</a> de acordo;
- - Validar as rotas internas utilizando Token `JWT`;
- - Fazer um `CRUD` utilizando `ORM`;
+ - Validar as rotas internas utilizando Token **JWT**;
 
 ## Api Routes
 
@@ -59,7 +59,7 @@ Clone o repositório:
 git clone https://github.com/matheuspor/trybe-futebol-clube
 ```
 
-Entre na pasta raíz do projeto:
+Entre na pasta raiz do projeto:
 ```bash 
 cd trybe-futebol-clube
 ```
@@ -90,7 +90,7 @@ $ npm run test:coverage
 
 ## Lista de Requisitos:
 
-<p><em><b>Sequelize:</em></b></p>
+<p><em>Sequelize:</em></b></p>
 
 - [x] 1 - Desenvolva em `/app/backend/src/database` nas pastas correspondentes, uma migration e um model para a tabela de `clubs`;
 - [x] 2 - Desenvolva em `/app/backend/src/database` nas pastas correspondentes, uma migration e um model para a tabela de `matchs`;
